@@ -12,7 +12,7 @@ import NavigationContainer from "./src/navigation";
 const App = (props) => {
   return (
     <Provider store={store}>
-      <NavigationContainer />
+      <NavigationContainer {...props} />
     </Provider>
   );
 };

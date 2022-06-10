@@ -1,38 +1,35 @@
-import React from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
-import {connect} from 'react-redux';
-import {backArrow} from '../../assets';
-import CustomText from '../../components/CustomText';
-import {responsiveHeight} from '../../constants';
-import colors from '../../constants/colors';
+import React from "react";
+import { View, Image, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
+import { backArrow } from "../../assets";
+import CustomText from "../../components/CustomText";
+import { responsiveHeight } from "../../constants";
+import colors from "../../constants/colors";
 
-function DetailScreen({
-  dimension,
-  route: {
-    params: {item},
-  },
-  ...props
-}) {
+function DetailScreen({ dimension, route: { params }, ...props }) {
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: colors.white,
-      }}>
+      }}
+    >
       <View
         style={{
           height: responsiveHeight(dimension, 90),
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'row',
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
           paddingHorizontal: 20,
-        }}>
+        }}
+      >
         <View
           style={{
             flex: 0.5,
-            justifyContent: 'center',
-          }}>
+            justifyContent: "center",
+          }}
+        >
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <Image
               source={backArrow}
@@ -46,8 +43,9 @@ function DetailScreen({
         <View
           style={{
             flex: 1,
-          }}>
-          <CustomText fontSize={20}>{item.name}</CustomText>
+          }}
+        >
+          <CustomText fontSize={20}>{params?.item?.name}</CustomText>
         </View>
         <View
           style={{
@@ -58,62 +56,66 @@ function DetailScreen({
       <View
         style={{
           flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
+          alignItems: "center",
+          justifyContent: "center",
           paddingHorizontal: 20,
-        }}>
+        }}
+      >
         <Image
           style={{
             width: responsiveHeight(dimension, 150),
             height: responsiveHeight(dimension, 150),
-            resizeMode: 'center',
+            resizeMode: "center",
             borderRadius: responsiveHeight(dimension, 150 / 2),
           }}
-          source={{uri: item.img}}
+          source={{ uri: params?.item?.img }}
         />
         <CustomText fontSize={20} color={colors.grey400} marginTop={50}>
           <CustomText fontSize={20} color={colors.black}>
             Name:
-          </CustomText>{' '}
-          {item.name}
+          </CustomText>{" "}
+          {params?.item?.name}
         </CustomText>
         <CustomText fontSize={20} color={colors.grey400} marginTop={10}>
           <CustomText fontSize={20} color={colors.black}>
             Nickname:
-          </CustomText>{' '}
-          {item.nickname}
+          </CustomText>{" "}
+          {params?.item?.nickname}
         </CustomText>
         <CustomText fontSize={20} color={colors.grey400} marginTop={10}>
           <CustomText fontSize={20} color={colors.black}>
             Birthday:
-          </CustomText>{' '}
-          {item.birthday}
+          </CustomText>{" "}
+          {params?.item?.birthday}
         </CustomText>
         <CustomText fontSize={20} color={colors.grey400} marginTop={10}>
           <CustomText fontSize={20} color={colors.black}>
             Portrayed:
-          </CustomText>{' '}
-          {item.portrayed}
+          </CustomText>{" "}
+          {params?.item?.portrayed}
         </CustomText>
         <CustomText fontSize={20} color={colors.grey400} marginTop={10}>
           <CustomText fontSize={20} color={colors.black}>
             Category:
-          </CustomText>{' '}
-          {item.category}
+          </CustomText>{" "}
+          {params?.item?.category}
         </CustomText>
         <CustomText
           fontSize={20}
           color={colors.grey400}
           marginTop={10}
-          ellipsizeMode={false}>
+          ellipsizeMode={false}
+        >
           <CustomText fontSize={20} color={colors.black} ellipsizeMode={false}>
             Occupation:
-          </CustomText>{' '}
-          {item.occupation?.join(', ')}
+          </CustomText>{" "}
+          {params?.item?.occupation?.join(", ")}
         </CustomText>
       </View>
     </View>
   );
 }
-const mapStatetoProps = state => ({dimension: state.deviceDimensionReducer});
+const mapStatetoProps = (state) => ({
+  dimension: state.deviceDimensionReducer,
+});
 export default connect(mapStatetoProps)(DetailScreen);

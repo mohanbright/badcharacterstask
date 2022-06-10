@@ -27,7 +27,12 @@ const differnce = screenHeight - windowHeight;
 
 const Stack = createNativeStackNavigator();
 
-function NavigationContainer({ dimension, changeOrientation, ...props }) {
+function NavigationContainer({
+  dimension,
+  changeOrientation,
+  initialRouteName = "HomeScreen",
+  ...props
+}) {
   const [RealHeight, setRealHeight] = useState(
     Platform.OS === "ios"
       ? windowHeight
@@ -68,6 +73,7 @@ function NavigationContainer({ dimension, changeOrientation, ...props }) {
       }}
     >
       <View
+        testID="layoutView"
         onLayout={onLayout}
         style={{
           flex: 1,
@@ -77,7 +83,7 @@ function NavigationContainer({ dimension, changeOrientation, ...props }) {
         <Container>
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName="HomeScreen"
+            initialRouteName={initialRouteName}
           >
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="DetailScreen" component={DetailScreen} />
